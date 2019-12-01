@@ -8,45 +8,37 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
+     
       {
-        path: '',
-        redirectTo: '/tabs/(home:home)',
-        pathMatch: 'full',
-      },
-      {
-        path: 'home',
+        path: 'generals',
         children: [
           {
             path: '',
-            loadChildren: '../home/home.module#HomePageModule'
+            loadChildren: '../general/general.module#GeneralPageModule'
           }
         ]
       },
       {
-        path: 'about',
+        path: 'reeportess',
         children: [
           {
             path: '',
-            loadChildren: '../about/about.module#AboutPageModule'
+            loadChildren: '../reeportes/reeportes.module#ReeportesPageModule'
           }
         ]
       },
       {
-        path: 'contact',
+        path: 'socioeconomicos',
         children: [
           {
             path: '',
-            loadChildren: '../contact/contact.module#ContactPageModule'
+            loadChildren: '../socieconomico/socieconomico.module#SocieconomicoPageModule'
           }
         ]
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/home',
-    pathMatch: 'full'
   }
+  
 ];
 
 @NgModule({

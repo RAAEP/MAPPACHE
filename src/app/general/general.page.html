@@ -1,0 +1,396 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+      <ion-title>
+        Formulario General
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+  
+    <ion-card>
+        <ion-img src="/assets/student.png"></ion-img>
+    </ion-card>    
+  
+    <ion-card>
+  
+      <ion-card-header >          
+            <ion-card-subtitle >Datos Generales del Aspirante</ion-card-subtitle>
+      </ion-card-header>
+      <form (submit)="enviar()">
+
+      <ion-card-content>
+        <ion-item>
+            <ion-label position="floating">NIP</ion-label>
+          <ion-input [(ngModel)]="formGeneral.nip" readonly name="nip" id="nips" #nip="ngModel" type="text" required></ion-input>
+      </ion-item>
+     
+        <ion-item>
+            <ion-label position="floating">Primer apellido</ion-label>
+            <ion-input [(ngModel)]="formGeneral.apellido_paterno" autocapitalize='on' name="apellido_paterno" #apellido_paterno="ngModel" type="text" required="on" onkeyup="javascript:this.value=this.value.toUpperCase();"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+            <ion-label position="floating">Segundo apellido</ion-label>
+            <ion-input [(ngModel)]="formGeneral.apellido_materno" name="apellido_materno" #apellido_materno="ngModel" type="text" required onkeyup="javascript:this.value=this.value.toUpperCase();"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="formGeneral.nombre_aspirante" name="nombre_aspirante" #nombre_aspirante="ngModel" type="text" required onkeyup="javascript:this.value=this.value.toUpperCase();"></ion-input>
+        </ion-item>
+  
+         <ion-item>  
+   
+          <ion-grid>
+           <ion-row>
+            <ion-col size="6">
+                <ion-button color="success">Datos</ion-button>
+            </ion-col>    
+            <ion-col size="6">
+                <ion-label position="floating">CURP</ion-label>
+                <ion-input [(ngModel)]="formGeneral.curp" name="curp" #curp="ngModel" type="text" required onkeyup="javascript:this.value=this.value.toUpperCase();"></ion-input>
+            </ion-col>
+            </ion-row>
+            </ion-grid>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Fecha de nacimiento</ion-label>
+          <ion-datetime [(ngModel)]="formGeneral.fecha_nacimiento" name="fecha_nacimiento" #fecha_nacimiento="ngModel"  required display-format="DD/MM/YYYY" min="1994-03-14" max="2025-12-09"></ion-datetime>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Genero</ion-label>
+          <ion-select  [(ngModel)]="formGeneral.sexo" name="sexo" #sexo="ngModel" type="text" required>
+            <ion-select-option value="H">Hombre</ion-select-option>
+            <ion-select-option value="M">Mujer</ion-select-option>
+          </ion-select>
+        </ion-item>
+    
+      <ion-item>
+        <ion-label>Nacionalidad</ion-label>
+        <ion-select  [(ngModel)]="formGeneral.nacionalidad" name="nacionalidad" #nacionalidad="ngModel" type="text" required>
+          <ion-select-option value="1">Mexicana</ion-select-option>
+          <ion-select-option value="2">Extranjera</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Capacidad Diferente</ion-label>
+        <ion-select [(ngModel)]="formGeneral.capacidad_diferente" name="capacidad_diferente" #capacidad_diferente="ngModel" type="text" required >
+          <ion-select-option value="N">No</ion-select-option>
+          <ion-select-option value="S">Si</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Tendencia Escritura</ion-label>
+        <ion-select [(ngModel)]="formGeneral.preferencia_escritura" name="preferencia_escritura" #preferencia_escritura="ngModel" type="text" required >
+          <ion-select-option value="diestro">Diestro</ion-select-option>
+          <ion-select-option value="zurdo">Zurdo</ion-select-option>
+          <ion-select-option value="ambidiestro">Ambidiestro</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Domina lengua Maya</ion-label>
+        <ion-select [(ngModel)]="formGeneral.lengua_maya" name="lengua_maya" #lengua_maya="ngModel" type="text" required >
+          <ion-select-option value="N">No</ion-select-option>
+          <ion-select-option value="S">Si</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Carrera</ion-label>
+        <ion-select   [(ngModel)]="formGeneral.carrera" name="carrera" #carrera="ngModel" type="text" required >
+          <ion-select-option *ngFor="let datos of carreras" value="{{datos.id}}">{{datos.carrera}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-card-header >          
+        <ion-card-subtitle >Preparatoria de Procedencia</ion-card-subtitle>
+      </ion-card-header>
+  
+      <ion-item>
+        <ion-label>Estado</ion-label>
+        <ion-select   [(ngModel)]="formGeneral.entidad_federativa_prepa" name="entidad_federativa_prepa" #entidad_federativa_prepa="ngModel" type="text" required >
+          <ion-select-option *ngFor="let datos of estados" value="{{datos.id}}">{{datos.clave}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Municipio</ion-label>
+        <ion-select   [(ngModel)]="formGeneral.municipalitySchool" name="municipalitySchool" #municipalitySchool="ngModel" type="text" required >
+          <ion-select-option  *ngFor="let datos of municipio[formGeneral.entidad_federativa_prepa]" value="{{datos}}">{{datos}}</ion-select-option>
+        </ion-select>      
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Preparatorias</ion-label>
+        <ion-select   [(ngModel)]="formGeneral.clave_preparatoria" name="clave_preparatoria" #clave_preparatoria="ngModel" type="text" required >
+          <ion-select-option *ngIf="formGeneral.municipalitySchool === Preparatorias.Municipio"  value="" >{{Preparatorias.Municipio}}</ion-select-option>
+        </ion-select>      
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Número de Seguridad Social</ion-label>
+        <ion-input [(ngModel)]="formGeneral.nss" name="nss" #nss="ngModel" type="number" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Año de egreso de preparatoria</ion-label>
+      <ion-input [(ngModel)]="formGeneral.agnio_egreso" name="agnio_egreso" #agnio_egreso="ngModel" type="number" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Promedio General</ion-label>
+    <ion-input [(ngModel)]="formGeneral.promedio_general" name="promedio_general" #promedio_general="ngModel" type="number" required min="70" max="100"></ion-input>
+</ion-item>
+  
+
+<ion-card-header >          
+  <ion-card-subtitle >Domicilio Actual</ion-card-subtitle>
+</ion-card-header>
+
+
+<ion-item>
+  <ion-label position="floating">Calle con No.Exterior y Interior</ion-label>
+  <ion-input [(ngModel)]="formGeneral.calle_no" name="calle_no" #calle_no="ngModel" type="text" required></ion-input>
+</ion-item>
+
+
+<ion-item>
+  <ion-label position="floating">Código Postal</ion-label>
+  <ion-input [(ngModel)]="formGeneral.codigo_postal" name="codigo_postal" #codigo_postal="ngModel" type="text" required></ion-input>
+</ion-item>
+  
+
+<ion-item>
+  <ion-label>Entidad Federativa</ion-label>
+  <ion-select   [(ngModel)]="formGeneral.entidad_federativa" name="entidad_federativa" #entidad_federativa="ngModel" type="text" required >
+    <ion-select-option  value="23" >QUINTANA ROO</ion-select-option>
+  </ion-select>      
+</ion-item>
+
+<ion-item>
+  <ion-label position="floating">Municipio</ion-label>
+  <ion-input [(ngModel)]="formGeneral.municipio" name="municipio" #municipio="ngModel" type="text" required></ion-input>
+</ion-item>
+
+
+<ion-item>
+  <ion-label>Colonia</ion-label>
+  <ion-select   [(ngModel)]="formGeneral.colonia_aspirante" name="colonia_aspirante" #colonia_aspirante="ngModel" type="text" required >
+    <ion-select-option  value="23" ></ion-select-option>
+  </ion-select>      
+</ion-item>
+
+
+<ion-item>
+  <ion-label>Zona de procedencia</ion-label>
+  <ion-select   [(ngModel)]="formGeneral.zona_procedencia" name="zona_procedencia" #zona_procedencia="ngModel" type="text" required >
+    <ion-select-option  value="23" ></ion-select-option>
+  </ion-select>      
+</ion-item>
+
+
+<ion-item>
+  <ion-label position="floating">Teléfono</ion-label>
+  <ion-input [(ngModel)]="formGeneral.telefono" name="telefono" #telefono="ngModel" type="tel" required></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="floating">Correo Eletrónico</ion-label>
+  <ion-input [(ngModel)]="formGeneral.correo_electronico" name="correo_electronico" #correo_electronico="ngModel" type="email" required></ion-input>
+</ion-item>
+
+
+
+<ion-item>
+    <ion-label>Estado Civil</ion-label>
+    <ion-select   [(ngModel)]="formGeneral.estado_civil" name="estado_civil" #estado_civil="ngModel" type="text" required >
+      <ion-select-option  *ngFor="let datos of estadoCivil" value="{{datos}}">{{datos}}</ion-select-option>
+    </ion-select>      
+  </ion-item>
+
+<ion-list>
+    <ion-radio-group [(ngModel)]="formGeneral.tienes_beca" name="tienes_beca" #tienes_beca="ngModel">
+      <ion-list-header>¿Cuentas con beca?</ion-list-header>
+      <ion-item>
+          <ion-label>Si</ion-label>
+          <ion-radio value="S"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <ion-label>No</ion-label>
+            <ion-radio value="N"></ion-radio>
+          </ion-item>
+    
+    </ion-radio-group>
+  </ion-list>
+  
+  <ion-list>
+      <ion-radio-group [(ngModel)]="formGeneral.programa_oportunidades" name="programa_oportunidades" #programa_oportunidades="ngModel">
+        <ion-list-header>¿Tu familia pertence al programa Oportunidades?</ion-list-header>
+        <ion-item>
+            <ion-label>Si</ion-label>
+            <ion-radio value="S"></ion-radio>
+          </ion-item>
+          <ion-item>
+              <ion-label>No</ion-label>
+              <ion-radio value="N"></ion-radio>
+            </ion-item>
+      
+      </ion-radio-group>
+    </ion-list>  
+
+
+
+    <ion-card-header >          
+        <ion-card-subtitle >Nombre del padre</ion-card-subtitle>
+      </ion-card-header>
+
+
+      <ion-item>
+        <ion-label position="floating">Primer apellido</ion-label>
+        <ion-input [(ngModel)]="formGeneral.apellido_paterno_padre" name="apellido_paterno_padre" #apellido_paterno_padre="ngModel" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Segundo apellido</ion-label>
+        <ion-input [(ngModel)]="formGeneral.apellido_materno_padre" name="apellido_materno_padre" #apellido_materno_padre="ngModel" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input [(ngModel)]="formGeneral.nombre_padre" name="nombre_padre" #nombre_padre="ngModel" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-list>
+        <ion-radio-group [(ngModel)]="formGeneral.vive_padre" name="vive_padre" #vive_padre="ngModel">
+          <ion-list-header>Vive</ion-list-header>
+          <ion-item>
+              <ion-label>Si</ion-label>
+              <ion-radio checked="" value="S"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label>No</ion-label>
+                <ion-radio value="N"></ion-radio>
+              </ion-item>
+        
+        </ion-radio-group>
+      </ion-list>  
+      
+
+      <ion-card-header >          
+        <ion-card-subtitle >Nombre de la madre</ion-card-subtitle>
+      </ion-card-header>
+
+
+      <ion-item>
+        <ion-label position="floating">Primer apellido</ion-label>
+        <ion-input [(ngModel)]="formGeneral.apellido_paterno_madre" name="apellido_paterno_madre" #apellido_paterno_madre="ngModel" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Segundo apellido</ion-label>
+        <ion-input [(ngModel)]="formGeneral.apellido_materno_madre" name="apellido_materno_madre" #apellido_materno_madre="ngModel" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input [(ngModel)]="formGeneral.nombre_madre" name="nombre_madre" #nombre_madre="ngModel" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-list>
+        <ion-radio-group [(ngModel)]="formGeneral.vive_madre" name="vive_madre" #vive_madre="ngModel">
+          <ion-list-header>Vive</ion-list-header>
+          <ion-item>
+              <ion-label>Si</ion-label>
+              <ion-radio checked="" value="S"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label>No</ion-label>
+                <ion-radio value="N"></ion-radio>
+              </ion-item>
+        
+        </ion-radio-group>
+      </ion-list>  
+
+      <ion-list *ngIf="(formGeneral.carrera === '23') || (formGeneral.carrera === '25') || (formGeneral.carrera === '40')">
+        <ion-card-header >          
+          <ion-card-subtitle >ASPIRANTES DE MAESTRÍA</ion-card-subtitle>
+        </ion-card-header>
+
+      <ion-item>
+        <ion-label position="floating">Escuela Superior de Procedencia</ion-label>
+        <ion-input [(ngModel)]="formGeneral.escuela_superior" name="escuela_superior" #escuela_superior="ngModel" type="text" required></ion-input>
+      </ion-item> 
+
+      <ion-item>
+        <ion-label position="floating">Licenciatura Cursada</ion-label>
+        <ion-input [(ngModel)]="formGeneral.licenciatura_cursada" name="licenciatura_cursada" #licenciatura_cursada="ngModel" type="text" required></ion-input>
+      </ion-item> 
+
+      <ion-item>
+        <ion-label position="floating">Especialidad de licenciatura</ion-label>
+        <ion-input [(ngModel)]="formGeneral.especialidad_licenciatura" name="especialidad_licenciatura" #especialidad_licenciatura="ngModel" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Promedio Licenciatura</ion-label>
+        <ion-input [(ngModel)]="formGeneral.promedio_licenciatura" name="promedio_licenciatura" #promedio_licenciatura="ngModel" type="number" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Periodo Plan de estudios</ion-label>
+        <ion-input [(ngModel)]="formGeneral.periodCurriculum" name="periodCurriculum" #periodCurriculum="ngModel" type="number" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Fecha de Titulación</ion-label>
+        <ion-input [(ngModel)]="formGeneral.fecha_titulacion" name="fecha_titulacion" #fecha_titulacion="ngModel" type="number" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Título de la tesis</ion-label>
+        <ion-input [(ngModel)]="formGeneral.titulo_tesis" name="titulo_tesis" #titulo_tesis="ngModel" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-list>
+        <ion-radio-group [(ngModel)]="formGeneral.presentaExamen" name="presentaExamen" #presentaExamen="ngModel">
+          <ion-list-header>Presentará EXANI III</ion-list-header>
+          <ion-item>
+              <ion-label>Tec Chetumal</ion-label>
+              <ion-radio checked="" value="ITCH"></ion-radio>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label>Otro</ion-label>
+                <ion-radio value="Otro"></ion-radio>
+              </ion-item>
+
+              <ion-item *ngIf="formGeneral.presentaExamen === 'Otro'">
+                <ion-label position="floating">Especifique</ion-label>
+                <ion-input [(ngModel)]="formGeneral.presentaExamen" name="presentaExamen" #presentaExamen="ngModel" type="text" required></ion-input>
+              </ion-item>
+        
+        </ion-radio-group>
+      </ion-list>  
+      
+
+
+  </ion-list>  
+
+      </ion-card-content>
+      <ion-button  expand="block" type="submit" class="ion-no-margin" color="primary" >Enviar</ion-button>
+    </form>
+
+    </ion-card>
+      
+
+  
+  </ion-content>

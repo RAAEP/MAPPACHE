@@ -10,6 +10,9 @@ import { TabsPage } from './tabs.page';
 import { ContactPageModule } from '../contact/contact.module';
 import { AboutPageModule } from '../about/about.module';
 import { HomePageModule } from '../home/home.module';
+import {GeneralPageModule} from '../general/general.module';
+import {SocieconomicoPageModule} from '../socieconomico/socieconomico.module';
+import {ReeportesPageModule} from '../reeportes/reeportes.module';
 
 @NgModule({
   imports: [
@@ -19,7 +22,10 @@ import { HomePageModule } from '../home/home.module';
     TabsPageRoutingModule,
     HomePageModule,
     AboutPageModule,
-    ContactPageModule
+    ContactPageModule,
+    GeneralPageModule,
+    SocieconomicoPageModule,
+    ReeportesPageModule
   ],
   declarations: [TabsPage]
 })

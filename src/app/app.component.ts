@@ -13,20 +13,16 @@ export class AppComponent implements OnInit {
 
   pages = [
     {
-      title: 'Login',
-      url: '/login',
-      icon: 'log-in'
+      title: 'Home',
+      url: '/home',
+      icon: 'school'
     },
     {
-      title: 'Contact',
-      url: '/tabs/contact',
-      icon: 'person'
-    },
-    {
-      title: 'About',
-      url: '/tabs/about',
-      icon: 'information-circle'
+      title: 'Nuevo Ingreso',
+      url: '/general',
+      icon: 'person-add'
     }
+    
   ];
 
   constructor(
