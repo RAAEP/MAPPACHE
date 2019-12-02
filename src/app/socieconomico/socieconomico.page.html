@@ -20,16 +20,261 @@
       <ion-card-header >          
             <ion-card-subtitle >Datos Socioeconomicos del Aspirante</ion-card-subtitle>
       </ion-card-header>
+
       <ion-card-content>
   
         <ion-item>
           <ion-label position="floating">NIP</ion-label>
         <ion-input [(ngModel)]="formSocio.nip" readonly name="nip" id="nips" #nip="ngModel" type="text" required></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label>¿Con quién vives?</ion-label>
+      <ion-select   [(ngModel)]="formSocio.con_quien_vives" name="con_quien_vives" #con_quien_vives="ngModel" type="text" required >
+        <ion-select-option *ngFor="let datos of conVives" value="{{datos.id}}">{{datos.vives}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-label>¿La casa donde vives es?</ion-label>
+      <ion-select [(ngModel)]="formSocio.casa_vives" name="casa_vives" #casa_vives="ngModel" type="text" required >
+        <ion-select-option value="P">Propia</ion-select-option>
+        <ion-select-option value="R">Rentada</ion-select-option>
+        <ion-select-option value="E">Prestada</ion-select-option>
+        <ion-select-option value="S">Se está pagando</ion-select-option>
+        <ion-select-option value="O">Otra</ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>¿De quién dependes económicamente?</ion-label>
+      <ion-select   [(ngModel)]="formSocio.de_quien_dependes" name="de_quien_dependes" #de_quien_dependes="ngModel" type="text" required >
+        <ion-select-option *ngFor="let datos of dependesDe" value="{{datos.id}}">{{datos.dependes}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>¿Cuántos cuartos tiene la casa. (Sin contar baños ni pasillos)</ion-label>
+      <ion-select   [(ngModel)]="formSocio.cuartos_casa" name="cuartos_casa" #cuartos_casa="ngModel" type="text" required >
+        <ion-select-option *ngFor="let datos of numeroObjetos" value="{{datos.id}}">{{datos.valores}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>¿Cuántas personsa viven en la casa?</ion-label>
+      <ion-select   [(ngModel)]="formSocio.personas_casa" name="personas_casa" #personas_casa="ngModel" type="text" required >
+        <ion-select-option *ngFor="let datos of numeroObjetos" value="{{datos.id}}">{{datos.valores}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>¿Cuántas personas dependen del principal apoyo?</ion-label>
+      <ion-select   [(ngModel)]="formSocio.personas_dependen" name="personas_dependen" #personas_dependen="ngModel" type="text" required >
+        <ion-select-option *ngFor="let datos of numeroObjetos" value="{{datos.id}}">{{datos.valores}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
       </ion-card-content>
     </ion-card>
     
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nivel máximo de estudios de tus padres</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+
+          <ion-item>
+              <ion-label>Padre</ion-label>
+              <ion-select   [(ngModel)]="formSocio.nivel_estudios_padre" name="nivel_estudios_padre" #nivel_estudios_padre="ngModel" type="text" required >
+                <ion-select-option *ngFor="let datos of nivelEstudio" value="{{datos.id}}">{{datos.estudio}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Madre</ion-label>
+                <ion-select   [(ngModel)]="formSocio.nivel_estudios_madre" name="nivel_estudios_madre" #nivel_estudios_madre="ngModel" type="text" required >
+                  <ion-select-option *ngFor="let datos of nivelEstudio" value="{{datos.id}}">{{datos.estudio}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+    
+
+    <ion-card>
+        <ion-card-header>
+          <ion-card-title>¿Cual es la ocupación de tus padres o tutores?</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
   
+            <ion-item>
+                <ion-label>Padre</ion-label>
+                <ion-select   [(ngModel)]="formSocio.ocupacion_padre" name="ocupacion_padre" #ocupacion_padre="ngModel" type="text" required >
+                  <ion-select-option *ngFor="let datos of nivelTrabajo" value="{{datos.id}}">{{datos.trabajo}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+  
+              <ion-item>
+                  <ion-label>Madre</ion-label>
+                  <ion-select   [(ngModel)]="formSocio.ocupacion_madre" name="ocupacion_madre" #ocupacion_madre="ngModel" type="text" required >
+                    <ion-select-option *ngFor="let datos of nivelTrabajo" value="{{datos.id}}">{{datos.trabajo}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+  
+        </ion-card-content>
+      </ion-card>
+  
+
+      <ion-card>
+          <ion-card-header>
+            <ion-card-title>Ingresos Familiares Mensuales</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+    
+              <ion-item>
+                  <ion-label position="floating">Padre</ion-label>
+                <ion-input matInput [(ngModel)]="formSocio.ingresos_padre"  type="number" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Madre</ion-label>
+              <ion-input matInput [(ngModel)]="formSocio.ingresos_madre"  type="number" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label position="floating">Hermanos</ion-label>
+            <ion-input matInput [(ngModel)]="formSocio.ingresos_hermanos"    type="number" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Propios</ion-label>
+          <ion-input matInput [(ngModel)]="formSocio.ingresos_propios"   type="number" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Otros</ion-label>
+        <ion-input  matInput [(ngModel)]="formSocio.ingresos_otros"   type="number" required></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+        <ion-label position="floating">Total</ion-label>
+      <ion-input matInput [(ngModel)]="formSocio.total_ingresos" value="{{formSocio.ingresos_padre+formSocio.ingresos_madre+formSocio.ingresos_hermanos+formSocio.ingresos_propios+formSocio.ingresos_otros}}" name="total_ingresos"  #total_ingresos="ngModel" type="number" required></ion-input>
+  </ion-item>
+  
+    
+               
+    
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+              <ion-card-title>Datos de emergencia</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+      
+                <ion-item>
+                    <ion-label position="floating">Calle con No.Exterior y Interior</ion-label>
+                  <ion-input [(ngModel)]="formSocio.calle_no"  name="calle_no"  #calle_no="ngModel" type="text" required></ion-input>
+              </ion-item>
+  
+              <ion-item>
+                  <ion-label position="floating">Código Postal</ion-label>
+                <ion-input [(ngModel)]="formSocio.codigo_postal"  name="codigo_postal"  #codigo_postal="ngModel" type="text" required></ion-input>
+            </ion-item>
+  
+            <ion-item>
+                <ion-label>Entidad Federativa</ion-label>
+                <ion-select   [(ngModel)]="formSocio.entidad_federativa" name="entidad_federativa" #entidad_federativa="ngModel" type="text" required >
+                  <ion-select-option  value="23">Quintana Roo</ion-select-option>
+                </ion-select>
+              </ion-item>
+  
+          <ion-item>
+              <ion-label position="floating">Municipio</ion-label>
+            <ion-input [(ngModel)]="formSocio.municipio"  name="municipio"  #municipio="ngModel" type="text" required></ion-input>
+        </ion-item>
+  
+        
+      <ion-item>
+          <ion-label position="floating">Colonia</ion-label>
+        <ion-input [(ngModel)]="formSocio.colonia_aspirante"  name="colonia_aspirante"  #colonia_aspirante="ngModel" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Zona de procedencia</ion-label>
+      <ion-input [(ngModel)]="formSocio.zona_procedencia"  name="zona_procedencia"  #zona_procedencia="ngModel" type="text" required></ion-input>
+  </ion-item>
+    
+
+  <ion-item>
+      <ion-label>¿Cuál es tu tipo de Sangre?</ion-label>
+      <ion-select  [(ngModel)]="formSocio.tipo_sangre" name="tipo_sangre" #tipo_sangre="ngModel" type="text" required>
+        <ion-select-option value="A+">A+</ion-select-option>
+        <ion-select-option value="A-" >A-</ion-select-option>
+        <ion-select-option value="B+">B+</ion-select-option>
+        <ion-select-option value="B-">B-</ion-select-option>
+        <ion-select-option value="O+">O+</ion-select-option>
+        <ion-select-option value="O-">O-</ion-select-option>
+        <ion-select-option value="AB+">AB+</ion-select-option>
+        <ion-select-option value="AB-">AB-</ion-select-option>
+      </ion-select>
+    </ion-item>
+      
+    <ion-item>
+        <ion-label position="floating">¿A quién contactamos?</ion-label>
+      <ion-input [(ngModel)]="formSocio.comunicar_con"  name="comunicar_con"  #comunicar_con="ngModel" type="text" required></ion-input>
+  </ion-item>  
+  
+  <ion-item>
+      <ion-label position="floating">Teléfono</ion-label>
+    <ion-input [(ngModel)]="formSocio.telefono"  name="telefono"  #telefono="ngModel" type="text" required></ion-input>
+</ion-item> 
+
+
+<ion-list>
+    <ion-radio-group [(ngModel)]="formtrabajo.formtrabajo" name="trabaja" #trabaja="ngModel">
+      <ion-list-header>¿Trabaja?</ion-list-header>
+      <ion-item>
+          <ion-label>Si</ion-label>
+          <ion-radio checked="" value="S"></ion-radio>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label>No</ion-label>
+            <ion-radio value="N"></ion-radio>
+          </ion-item>
+
+          <ion-item *ngIf="formtrabajo.formtrabajo === 'S'">
+            <ion-label position="floating">Lugar de Trabajo</ion-label>
+            <ion-input [(ngModel)]="formSocio.lugar_trabajo" name="lugar_trabajo" #lugar_trabajo="ngModel" type="text" required></ion-input>
+          </ion-item>
+          <ion-item *ngIf="formtrabajo.formtrabajo === 'S'">
+              <ion-label position="floating">Teléfono de su trabajo</ion-label>
+              <ion-input [(ngModel)]="formSocio.telefono_trabajo" name="telefono_trabajo" #telefono_trabajo="ngModel" type="text" required></ion-input>
+            </ion-item>
+    
+    </ion-radio-group>
+  </ion-list>  
+      
+            </ion-card-content>
+            <form (submit)="enviar()">
+
+            <ion-button  expand="block" type="submit" class="ion-no-margin" color="primary" >Enviar</ion-button>
+          </form>
+
+          </ion-card>
+
+
   </ion-content>
   
 

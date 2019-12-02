@@ -5,16 +5,19 @@ import { HttpClient,HttpClientModule,HttpHeaders, HttpErrorResponse  } from '@an
 @Injectable({
   providedIn: 'root'
 })
-export class GeneralAlumnosService {
-  header = new HttpHeaders();
 
+
+export class SocioeconomicoAlumnosService {
+
+  header = new HttpHeaders();
 
   constructor(private http:HttpClient) { 
     this.header.append('Content-Type', 'aplicaction/json');
   this.header.append("Autorization","Raul"+localStorage.getItem("token"));
   }
 
-  //Método para realizar el envio de datos al servidor
+
+   //Método para realizar el envio de datos al servidor
  envioDatos (data:any){
 
   let options = {
@@ -23,7 +26,7 @@ export class GeneralAlumnosService {
     }
   };
   
- var url = 'http://192.168.1.70/Proyecto_Nuevo_Ingreso/public/api/fichas_general';
+ var url = 'http://192.168.1.70/Proyecto_Nuevo_Ingreso/public/api/fichas_socioeconomico';
  return new Promise(resolve => {
   this.http.post(url,JSON.stringify(data),options)
      .subscribe(data => {

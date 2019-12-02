@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute,Router}      from '@angular/router';
 
 @Component({
   selector: 'app-reeportes',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReeportesPage implements OnInit {
 
-  constructor() { }
+  nip = null
+
+  constructor(private activateRoute:ActivatedRoute) 
+  {
+    this.nip=this.activateRoute.snapshot.paramMap.get('nip')
+
+   }
 
   ngOnInit() {
   }
