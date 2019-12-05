@@ -1,61 +1,72 @@
-<ion-header>
-    <ion-toolbar>
+<ion-header >
+    <ion-toolbar >
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-      <ion-title>
-        Formulario General
-      </ion-title>
+      <!-- <ion-title >Formulario General</ion-title> -->
+      <ion-img src="/assets/tec_chetumal.png"></ion-img>
+
     </ion-toolbar>
   </ion-header>
   
   <ion-content>
   
     <ion-card>
-        <ion-img src="/assets/student.png"></ion-img>
+        <ion-img style="height: 9rem;width: 24rem; text-align: center;" src="/assets/student.png"></ion-img>
     </ion-card>    
   
     <ion-card>
-  
-      <ion-card-header >          
-            <ion-card-subtitle >Datos Generales del Aspirante</ion-card-subtitle>
+      <ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+            <ion-card-title style="color:#fff8dc; text-align: center;">Datos Generales del Aspirante</ion-card-title>
       </ion-card-header>
       <form (submit)="enviar()">
 
       <ion-card-content>
         <ion-item>
             <ion-label position="floating">NIP</ion-label>
-          <ion-input [(ngModel)]="formGeneral.nip" readonly name="nip" id="nips" #nip="ngModel" type="text" required></ion-input>
+          <ion-input style="background:rgb(192, 192, 192);" [(ngModel)]="formGeneral.nip" readonly name="nip" id="nips" #nip="ngModel" type="text" required></ion-input>
       </ion-item>
      
         <ion-item>
-            <ion-label position="floating">Primer apellido</ion-label>
+            <ion-label position="floating">
+                <p style="color: red;" *ngIf="apellido_paterno.errors">*</p>
+              Primer apellido</ion-label>
             <ion-input [(ngModel)]="formGeneral.apellido_paterno" autocapitalize='on' name="apellido_paterno" #apellido_paterno="ngModel" type="text" required="on" onkeyup="javascript:this.value=this.value.toUpperCase();"></ion-input>
         </ion-item>
   
         <ion-item>
-            <ion-label position="floating">Segundo apellido</ion-label>
+            <ion-label position="floating">
+                <p style="color: red;" *ngIf="apellido_materno.errors">*</p>
+              Segundo apellido</ion-label>
             <ion-input [(ngModel)]="formGeneral.apellido_materno" name="apellido_materno" #apellido_materno="ngModel" type="text" required onkeyup="javascript:this.value=this.value.toUpperCase();"></ion-input>
         </ion-item>
   
         <ion-item>
-            <ion-label position="floating">Nombre</ion-label>
+
+            <ion-label position="floating">
+              <p style="color: red;" *ngIf="nombre_aspirante.errors">*</p>
+              Nombre
+            </ion-label>
             <ion-input [(ngModel)]="formGeneral.nombre_aspirante" name="nombre_aspirante" #nombre_aspirante="ngModel" type="text" required onkeyup="javascript:this.value=this.value.toUpperCase();"></ion-input>
+
         </ion-item>
   
          <ion-item>  
    
           <ion-grid>
            <ion-row>
-            <ion-col size="6">
-                <ion-button color="success">Datos</ion-button>
-            </ion-col>    
-            <ion-col size="6">
-                <ion-label position="floating">CURP</ion-label>
-                <ion-input [(ngModel)]="formGeneral.curp" name="curp" #curp="ngModel" type="text" required onkeyup="javascript:this.value=this.value.toUpperCase();"></ion-input>
+
+            <ion-col size="12">
+                <ion-label position="floating"><ion-button  (click)="curpFecha()" color="success">Datos</ion-button>
+                  CURP </ion-label>
+                <ion-input (click)="curpAlert()" [(ngModel)]="formGeneral.curp" name="curp" #curp="ngModel" type="text" maxlength="18" required minlength="18" onkeyup="javascript:this.value=this.value.toUpperCase();"></ion-input>
+
             </ion-col>
+
             </ion-row>
             </ion-grid>
+           
+
         </ion-item>
   
         <ion-item>
@@ -111,10 +122,12 @@
         </ion-select>
       </ion-item>
   
-      <ion-card-header >          
-        <ion-card-subtitle >Preparatoria de Procedencia</ion-card-subtitle>
+     <!-- ****************************************HEADER******************************************** -->
+      <ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+        <ion-card-title style="color:#fff8dc; text-align: center;">Preparatoria de Procedencia</ion-card-title>
       </ion-card-header>
-  
+
+
       <ion-item>
         <ion-label>Estado</ion-label>
         <ion-select   [(ngModel)]="formGeneral.entidad_federativa_prepa" name="entidad_federativa_prepa" #entidad_federativa_prepa="ngModel" type="text" required >
@@ -124,21 +137,21 @@
   
       <ion-item>
         <ion-label>Municipio</ion-label>
-        <ion-select   [(ngModel)]="formGeneral.municipalitySchool" name="municipalitySchool" #municipalitySchool="ngModel" type="text" required >
-          <ion-select-option  *ngFor="let datos of municipio[formGeneral.entidad_federativa_prepa]" value="{{datos}}">{{datos}}</ion-select-option>
+        <ion-select  (click)="municp()" [(ngModel)]="formGeneral.municipalitySchool" name="municipalitySchool" #municipalitySchool="ngModel" type="text" required >
+          <ion-select-option  *ngFor="let datos of munici" value="{{datos}}">{{datos}}</ion-select-option>
         </ion-select>      
       </ion-item>
   
       <ion-item>
         <ion-label>Preparatorias</ion-label>
-        <ion-select   [(ngModel)]="formGeneral.clave_preparatoria" name="clave_preparatoria" #clave_preparatoria="ngModel" type="text" required >
-          <ion-select-option *ngIf="formGeneral.municipalitySchool === Preparatorias.Municipio"  value="" >{{Preparatorias.Municipio}}</ion-select-option>
+        <ion-select (click)="prepar()"   [(ngModel)]="formGeneral.clave_preparatoria" name="clave_preparatoria" #clave_preparatoria="ngModel" type="text" required >
+          <ion-select-option *ngFor="let datos of prepas"  value="" >{{datos.Nombre}}</ion-select-option>
         </ion-select>      
       </ion-item>
   
       <ion-item>
         <ion-label position="floating">Número de Seguridad Social</ion-label>
-        <ion-input [(ngModel)]="formGeneral.nss" name="nss" #nss="ngModel" type="number" required></ion-input>
+        <ion-input [(ngModel)]="formGeneral.nss" name="nss" #nss="ngModel" type="text" minlength="11" maxlength="11" pattern="[0-9]+" required></ion-input>
     </ion-item>
 
     <ion-item>
@@ -151,11 +164,10 @@
     <ion-input [(ngModel)]="formGeneral.promedio_general" name="promedio_general" #promedio_general="ngModel" type="number" required min="70" max="100"></ion-input>
 </ion-item>
   
-
-<ion-card-header >          
-  <ion-card-subtitle >Domicilio Actual</ion-card-subtitle>
+<!-- ****************************************HEADER******************************************** -->
+<ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+  <ion-card-title style="color:#fff8dc; text-align: center;">Domicilio Actual</ion-card-title>
 </ion-card-header>
-
 
 <ion-item>
   <ion-label position="floating">Calle con No.Exterior y Interior</ion-label>
@@ -248,11 +260,10 @@
     </ion-list>  
 
 
-
-    <ion-card-header >          
-        <ion-card-subtitle >Nombre del padre</ion-card-subtitle>
-      </ion-card-header>
-
+<!-- ****************************************HEADER******************************************** -->
+<ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+  <ion-card-title style="color:#fff8dc; text-align: center;">Nombre del padre</ion-card-title>
+</ion-card-header>
 
       <ion-item>
         <ion-label position="floating">Primer apellido</ion-label>
@@ -285,10 +296,11 @@
       </ion-list>  
       
 
-      <ion-card-header >          
-        <ion-card-subtitle >Nombre de la madre</ion-card-subtitle>
-      </ion-card-header>
-
+  
+<!-- ****************************************HEADER******************************************** -->
+<ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+  <ion-card-title style="color:#fff8dc; text-align: center;">Nombre de la madre</ion-card-title>
+</ion-card-header>
 
       <ion-item>
         <ion-label position="floating">Primer apellido</ion-label>
@@ -321,10 +333,11 @@
       </ion-list>  
 
       <ion-list *ngIf="(formGeneral.carrera === '23') || (formGeneral.carrera === '25') || (formGeneral.carrera === '40')">
-        <ion-card-header >          
-          <ion-card-subtitle >ASPIRANTES DE MAESTRÍA</ion-card-subtitle>
+        
+        <!-- ****************************************HEADER******************************************** -->
+        <ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+          <ion-card-title style="color:#fff8dc; text-align: center;">ASPIRANTES DE MAESTRÍA</ion-card-title>
         </ion-card-header>
-
       <ion-item>
         <ion-label position="floating">Escuela Superior de Procedencia</ion-label>
         <ion-input [(ngModel)]="formGeneral.escuela_superior" name="escuela_superior" #escuela_superior="ngModel" type="text" required></ion-input>

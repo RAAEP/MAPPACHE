@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
 import {GeneralAlumnosService}from '../services/general-alumnos.service';
 import{Router}from'@angular/router';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -12,13 +13,81 @@ import{Router}from'@angular/router';
 export class GeneralPage implements OnInit {
 
   formGeneral: any;
+  // Variable que permite lanzar una vez la alerta del la curp
+  bandera = true;
+  prepas = [];
+  munici = [];
+  num = 1;
   
   nu = Math.floor(1e3 + (Math.random() * 9e3));
-  constructor(public navCtrl: NavController,private router:Router,public api:GeneralAlumnosService, public loadingController:LoadingController) {  
+  constructor(public alertController: AlertController,public navCtrl: NavController,private router:Router,public api:GeneralAlumnosService, public loadingController:LoadingController) {  
     
     this.formGeneral = {'nip':this.nu};
 
   }
+
+  municp(){
+    for (const iterator of this.municipio[this.formGeneral.entidad_federativa_prepa]) {
+      console.log(iterator);
+      this.munici.push(iterator);
+    }
+  }
+  
+  prepar(){
+    this.Preparatorias.forEach(element => {
+      if (this.formGeneral.municipalitySchool === element.Municipio) {
+
+        this.prepas.push(element)
+      }
+      
+    });
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: this.formGeneral.nombre_aspirante +" "+ this.formGeneral.apellido_paterno + " "+this.formGeneral.apellido_materno,
+      subHeader: 'Estas seguro de continuar',
+      message: 'Recuerda que todo los datos recabados por esta apliación, son para cuestiones acádemicas y aceptas no estar ingresado información que no te pertenezca.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  // Alerta para saber que hacer con la curp
+  async curpAlert() {
+    if (this.bandera) {
+      this.bandera = false;
+      const alert = await this.alertController.create({
+        header: "CURP",
+        subHeader: '!Cargar datos¡',
+        message: 'Una vez ingresada tu CURP por favor selecciona el botón verde, para poder extraer algunos datos de ella.',
+        buttons: ['OK']
+      });
+  
+      await alert.present();
+    }
+  }
+
+  curpFecha(){
+    let cadena = this.formGeneral.curp,
+  inicio = 4,
+  fin    = 11,
+  subCadena = cadena.substring(inicio, fin);
+  var meses=new Array("01","02","03","04","05","06","07","08","09","10","11","12");
+
+  var year = subCadena.substring(0,2);
+  var mes = subCadena.substring(2,4); 
+  var dia = subCadena.substring(4,6);  
+  var sexo = subCadena.substring(6,7); 
+  var serverdate = new Date(year,(mes-1),dia);
+  var datestring= serverdate.getFullYear()+ "-" + meses[serverdate.getMonth()] + "-"+serverdate.getDate();
+                      
+console.log(subCadena);
+console.log(datestring);
+   this.formGeneral.fecha_nacimiento = datestring;
+   this.formGeneral.sexo = sexo;
+    }
 
   carreras = [{"id":"1","carrera":"ARQUITECTURA"}
     ,{"id":"16","carrera":"CONTADOR PÚBLICO"}
@@ -2280,8 +2349,9 @@ enviar(){
 
   console.log(this.formGeneral)
 
-  this.api.envioDatos(this.formGeneral)
-  this.router.navigate(['/socioeconomico/'+this.formGeneral.nip]);
+  // this.api.envioDatos(this.formGeneral)
+  // this.router.navigate(['/socioeconomico/'+this.formGeneral.nip]);
+  this.presentAlert()
 
 }
 
