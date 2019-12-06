@@ -19,7 +19,7 @@
       <ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
             <ion-card-title style="color:#fff8dc; text-align: center;">Datos Generales del Aspirante</ion-card-title>
       </ion-card-header>
-      <form (submit)="enviar()">
+      <form>
 
       <ion-card-content>
         <ion-item>
@@ -145,7 +145,7 @@
       <ion-item>
         <ion-label>Preparatorias</ion-label>
         <ion-select (click)="prepar()"   [(ngModel)]="formGeneral.clave_preparatoria" name="clave_preparatoria" #clave_preparatoria="ngModel" type="text" required >
-          <ion-select-option *ngFor="let datos of prepas"  value="" >{{datos.Nombre}}</ion-select-option>
+          <ion-select-option *ngFor="let datos of prepas"  value="{{datos.Clave}}" >{{datos.Nombre}}</ion-select-option>
         </ion-select>      
       </ion-item>
   
@@ -161,7 +161,7 @@
 
   <ion-item>
     <ion-label position="floating">Promedio General</ion-label>
-    <ion-input [(ngModel)]="formGeneral.promedio_general" name="promedio_general" #promedio_general="ngModel" type="number" required min="70" max="100"></ion-input>
+    <ion-input  (click)="promedioAlert()" [(ngModel)]="formGeneral.promedio_general" name="promedio_general" #promedio_general="ngModel" type="number" required min="70" max="100"></ion-input>
 </ion-item>
   
 <!-- ****************************************HEADER******************************************** -->
@@ -196,8 +196,8 @@
 
 <ion-item>
   <ion-label>Colonia</ion-label>
-  <ion-select   [(ngModel)]="formGeneral.colonia_aspirante" name="colonia_aspirante" #colonia_aspirante="ngModel" type="text" required >
-    <ion-select-option  value="23" ></ion-select-option>
+  <ion-select (click)="codigoPOS()"   [(ngModel)]="formGeneral.colonia_aspirante" name="colonia_aspirante" #colonia_aspirante="ngModel" type="text" required >
+    <ion-select-option *ngFor="let datos of colonias"  value="{{datos.asentamiento}}" >{{datos.asentamiento}}</ion-select-option>
   </ion-select>      
 </ion-item>
 
@@ -205,7 +205,7 @@
 <ion-item>
   <ion-label>Zona de procedencia</ion-label>
   <ion-select   [(ngModel)]="formGeneral.zona_procedencia" name="zona_procedencia" #zona_procedencia="ngModel" type="text" required >
-    <ion-select-option  value="23" ></ion-select-option>
+    <ion-select-option *ngFor="let datos of colonias"  value="{{datos.zona}}" >{{datos.zona}}</ion-select-option>
   </ion-select>      
 </ion-item>
 
@@ -399,7 +399,7 @@
   </ion-list>  
 
       </ion-card-content>
-      <ion-button  expand="block" type="submit" class="ion-no-margin" color="primary" >Enviar</ion-button>
+      <ion-button (click)="presentAlertConfirm()"  expand="block" type="submit" class="ion-no-margin" color="primary" >Enviar</ion-button>
     </form>
 
     </ion-card>

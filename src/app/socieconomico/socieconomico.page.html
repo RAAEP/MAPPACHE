@@ -4,7 +4,7 @@
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
       <ion-title>
-        Formulario Socioeconomico
+          <ion-img src="/assets/tec_chetumal.png"></ion-img>
       </ion-title>
     </ion-toolbar>
   </ion-header>
@@ -12,20 +12,23 @@
   <ion-content>
   
     <ion-card>
-        <ion-img src="/assets/economics.png"></ion-img>
+        <ion-img style="height: 9rem;width: 24rem; text-align: center;"  src="/assets/economics.png"></ion-img>
     </ion-card>    
   
     <ion-card>
   
-      <ion-card-header >          
-            <ion-card-subtitle >Datos Socioeconomicos del Aspirante</ion-card-subtitle>
-      </ion-card-header>
+      
+      <ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+          <ion-card-title style="color:#fff8dc; text-align: center;">Datos Socioeconomicos del Aspirante</ion-card-title>
+    </ion-card-header>
+
+      
 
       <ion-card-content>
   
         <ion-item>
           <ion-label position="floating">NIP</ion-label>
-        <ion-input [(ngModel)]="formSocio.nip" readonly name="nip" id="nips" #nip="ngModel" type="text" required></ion-input>
+        <ion-input style="background:rgb(192, 192, 192);" [(ngModel)]="formSocio.nip" readonly name="nip" id="nips" #nip="ngModel" type="text" required></ion-input>
     </ion-item>
 
     <ion-item>
@@ -82,9 +85,10 @@
     </ion-card>
     
     <ion-card>
-      <ion-card-header>
-        <ion-card-title>Nivel máximo de estudios de tus padres</ion-card-title>
-      </ion-card-header>
+     
+      <ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+          <ion-card-title style="color:#fff8dc; text-align: center;">Nivel máximo de estudios de tus padres</ion-card-title>
+    </ion-card-header>
     
       <ion-card-content>
 
@@ -107,9 +111,10 @@
     
 
     <ion-card>
-        <ion-card-header>
-          <ion-card-title>¿Cual es la ocupación de tus padres o tutores?</ion-card-title>
-        </ion-card-header>
+        
+        <ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+            <ion-card-title style="color:#fff8dc; text-align: center;">¿Cual es la ocupación de tus padres o tutores?</ion-card-title>
+      </ion-card-header>
       
         <ion-card-content>
   
@@ -132,9 +137,11 @@
   
 
       <ion-card>
-          <ion-card-header>
-            <ion-card-title>Ingresos Familiares Mensuales</ion-card-title>
-          </ion-card-header>
+   
+
+          <ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+              <ion-card-title style="color:#fff8dc; text-align: center;">Ingresos Familiares Mensuales</ion-card-title>
+        </ion-card-header>
         
           <ion-card-content>
     
@@ -176,9 +183,10 @@
         </ion-card>
 
         <ion-card>
-            <ion-card-header>
-              <ion-card-title>Datos de emergencia</ion-card-title>
-            </ion-card-header>
+            
+            <ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">          
+                <ion-card-title style="color:#fff8dc; text-align: center;">Datos de emergencia</ion-card-title>
+          </ion-card-header>
           
             <ion-card-content>
       
