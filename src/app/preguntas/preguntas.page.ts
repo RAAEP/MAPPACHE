@@ -1,16 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
-import { NoticiasService } from '../services/noticias.service';
-
+import { PreguntasService } from '../services/preguntas.service';
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  selector: 'app-preguntas',
+  templateUrl: './preguntas.page.html',
+  styleUrls: ['./preguntas.page.scss'],
 })
-export class HomePage {
+export class PreguntasPage implements OnInit {
 
-
-  constructor(public api:NoticiasService, public loadingController:LoadingController) {}
+  constructor(public api:PreguntasService, public loadingController:LoadingController) { }
 
   data1:any;
 
@@ -19,7 +17,7 @@ export class HomePage {
       message: 'Loading'
     });
     await loading.present();
-    this.api.getNoticias()
+    this.api.getPreguntas()
       .subscribe(res => {
         console.log(res);
         this.data1 = res;
@@ -29,10 +27,8 @@ export class HomePage {
         loading.dismiss();
       });
   }
-
-  
-   
   ngOnInit() {
-    this.getData();
+    this.getData()
   }
+
 }

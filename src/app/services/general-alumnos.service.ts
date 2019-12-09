@@ -6,24 +6,18 @@ import { HttpClient,HttpClientModule,HttpHeaders, HttpErrorResponse  } from '@an
   providedIn: 'root'
 })
 export class GeneralAlumnosService {
-  header = new HttpHeaders();
 
 
-  constructor(private http:HttpClient) { 
-    this.header.append('Content-Type', 'aplicaction/json');
-  this.header.append("Autorization","Raul"+localStorage.getItem("token"));
-  }
+  constructor(private http:HttpClient) { }
 
   //Método para realizar el envio de datos al servidor
  envioDatos (data:any){
 
   let options = {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
+   
   };
   
- var url = 'http://192.168.1.70/Proyecto_Nuevo_Ingreso/public/api/fichas_general';
+ var url = 'http://192.168.1.93/Proyecto_Nuevo_Ingreso/public/api/fichas_general';
  return new Promise(resolve => {
   this.http.post(url,JSON.stringify(data),options)
      .subscribe(data => {

@@ -11,21 +11,24 @@
 
 <ion-content padding>
  
+<ion-item *ngFor="let datos of data1" href="{{datos.urlNota}}">
 
-<ion-card>
-  <ion-card-header>
-    <ion-card-subtitle  >Card Subtitle</ion-card-subtitle>
-    <ion-card-title>Card Title</ion-card-title>
-  </ion-card-header>
+    <ion-card>
+      <ion-card-header>
+          <ion-card-title >{{datos.titulo}}</ion-card-title>
 
-  <ion-card-content>
-    Keep close to Nature's heart... and break clear away, once in awhile,
-    and climb a mountain or spend a week in the woods. Wash your spirit clean.
-  </ion-card-content>
-</ion-card>
+        <ion-card-subtitle>{{datos.subtitulos}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content >
+          {{datos.contenido}}
+          <ion-img  src="{{datos.urlImg}}"></ion-img>
+
+      </ion-card-content>
+    </ion-card>
+</ion-item>
 
 
- 
 
   <!-- fab placed to the bottom start -->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
@@ -33,19 +36,13 @@
       <ion-icon name="arrow-dropright"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="end">
-      <ion-fab-button><ion-icon name="logo-vimeo"></ion-icon></ion-fab-button>
-      <ion-fab-button><ion-icon name="logo-facebook"></ion-icon></ion-fab-button>
-      <ion-fab-button><ion-icon name="logo-instagram"></ion-icon></ion-fab-button>
-      <ion-fab-button><ion-icon name="logo-twitter"></ion-icon></ion-fab-button>
+      <ion-fab-button href="https://twitter.com/IT_Chetumal"><ion-icon  name="logo-facebook"></ion-icon></ion-fab-button>
+      <ion-fab-button href="https://www.instagram.com/itchetumal/?hl=es"><ion-icon name="logo-instagram"></ion-icon></ion-fab-button>
+      <ion-fab-button href="https://twitter.com/IT_Chetumal"><ion-icon name="logo-twitter"></ion-icon></ion-fab-button>
     </ion-fab-list>
     
   </ion-fab>
 
   
-
-
-
-  
-
 
 </ion-content>

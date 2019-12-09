@@ -26,7 +26,7 @@ export class SocioeconomicoAlumnosService {
     }
   };
   
- var url = 'http://192.168.1.70/Proyecto_Nuevo_Ingreso/public/api/fichas_socioeconomico';
+ var url = 'http://192.168.1.93/Proyecto_Nuevo_Ingreso/public/api/fichas_socioeconomico';
  return new Promise(resolve => {
   this.http.post(url,JSON.stringify(data),options)
      .subscribe(data => {

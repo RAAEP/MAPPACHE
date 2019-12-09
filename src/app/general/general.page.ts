@@ -2417,7 +2417,7 @@ enviar(){
 
   console.log(this.formGeneral)
 
-  // this.api.envioDatos(this.formGeneral)
+  this.api.envioDatos(this.formGeneral)
   this.router.navigate(['/socioeconomico/'+this.formGeneral.nip]);
 
 }

@@ -19,8 +19,13 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Nuevo Ingreso',
-      url: '/general',
+      url: '/bienvenida',
       icon: 'person-add'
+    },
+    {
+      title: 'Preguntas frecuentes',
+      url: '/preguntas',
+      icon: 'help'
     }
     
   ];

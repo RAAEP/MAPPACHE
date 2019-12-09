@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+
+        <ion-img src="/assets/tec_chetumal.png"></ion-img>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+      <ion-card *ngFor="let datos of data1">
+        <ion-card-header style=" background: #014E82;font-weight: bolder; font-family: Verdana, Geneva, Tahoma, sans-serif">
+            <ion-card-title style="color:#fff8dc; text-align: center;"> {{datos.pregunta}} </ion-card-title>
+        </ion-card-header>
+  
+        <ion-card-content >
+           
+          {{datos.respuesta}}
+  
+        </ion-card-content>
+      </ion-card>
+</ion-content>

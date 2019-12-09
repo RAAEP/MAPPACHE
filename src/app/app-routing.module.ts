@@ -7,7 +7,9 @@ const routes: Routes = [
   {path:'home',loadChildren:'./home/home.module#HomePageModule'},
   { path: 'reeportes/:nip', loadChildren: './reeportes/reeportes.module#ReeportesPageModule' },
   { path: 'general', loadChildren: './general/general.module#GeneralPageModule' },
-  {path:'socioeconomico/:nip',loadChildren:'./socieconomico/socieconomico.module#SocieconomicoPageModule'}
+  {path:'socioeconomico/:nip',loadChildren:'./socieconomico/socieconomico.module#SocieconomicoPageModule'},
+  { path: 'bienvenida', loadChildren: './bienvenida/bienvenida.module#BienvenidaPageModule' },
+  { path: 'preguntas', loadChildren: './preguntas/preguntas.module#PreguntasPageModule' }
 
 ];
 @NgModule({
